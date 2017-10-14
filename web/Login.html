@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="Login.css" rel="stylesheet" type="text/css" />
+        <style>
+            /* The snackbar - position it at the bottom and in the middle of the screen */
+            #snackbar {
+                visibility: hidden; /* Hidden by default. Visible on click */
+                min-width: 250px; /* Set a default minimum width */
+                margin-left: -125px; /* Divide value of min-width by 2 */
+                background-color: #333; /* Black background color */
+                color: #fff; /* White text color */
+                text-align: center; /* Centered text */
+                border-radius: 2px; /* Rounded borders */
+                padding: 16px; /* Padding */
+                position: fixed; /* Sit on top of the screen */
+                z-index: 1; /* Add a z-index if needed */
+                left: 50%; /* Center the snackbar */
+                bottom: 30px; /* 30px from the bottom */
+            }
+
+            /* Show the snackbar when clicking on a button (class added with JavaScript) */
+            #snackbar.show {
+                visibility: visible; /* Show the snackbar */
+
+                /* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
+                However, delay the fade out process for 2.5 seconds */
+                -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+                animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            }
+
+            /* Animations to fade the snackbar in and out */
+            @-webkit-keyframes fadein {
+                from {bottom: 0; opacity: 0;} 
+                to {bottom: 30px; opacity: 1;}
+            }
+
+            @keyframes fadein {
+                from {bottom: 0; opacity: 0;}
+                to {bottom: 30px; opacity: 1;}
+            }
+
+            @-webkit-keyframes fadeout {
+                from {bottom: 30px; opacity: 1;} 
+                to {bottom: 0; opacity: 0;}
+            }
+
+            @keyframes fadeout {
+                from {bottom: 30px; opacity: 1;}
+                to {bottom: 0; opacity: 0;}
+            }
+        </style>
+    </head>
+    <body onload="document.getElementById('id01').style.display = 'block'">
+        <button onclick="document.getElementById('id01').style.display = 'block'" id="btn_login" >Login</button>
+        <div id="id01" class="modal">
+        
+            <form class="modal-content animate" method = "POST" action=".\LoginServlet.do">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('id01').style.display = 'none'" class="close" title="Close Modal">&times;</span>
+                    <img src="logo.png" alt="LOGO" class="logo" />
+                </div>
+
+                <div class="container">
+                    <label><b>Username</b></label>
+                    <input id="name" type="text" placeholder="Enter Username" name="name" onblur="validateNonEmpty(this, document.getElementById('name_help'))" required/>
+                    <span id="name_help" class="help"></span>
+
+                    <label><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="password" onblur="validateLength1(6,this, document.getElementById('password_help'))" required/>
+                    <span id="password_help" class="help"></span>
+
+                    <button type="submit" onClick="Login(this)"> Login </button>
+                    <input type="checkbox" checked="checked" /> Remember me
+                </div>
+
+                <div class="container" style="background-color:#f1f1f1">
+                    <button type="button" class="cancelbtn"><a href="SignUp.html" id="signup">Sign Up</a></button>
+                    <span class="psw"><a onclick="reset();" style="color: blue; cursor: pointer;"> <u> Forgot password? </u> </a></span>
+                </div>
+            </form>
+        </div>
+        
+        <script>
+            // Get the modal
+            var modal = document.getElementById('id01');
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            }
+            
+            function reset() {
+                alert("Please check your mail to reset password..");
+            }
+        </script>
+    </body>
+</html>
